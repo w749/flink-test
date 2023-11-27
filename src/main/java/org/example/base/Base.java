@@ -39,7 +39,7 @@ public interface Base {
                 @Override
                 public void open(Configuration parameters) throws Exception {
                     super.open(parameters);
-                    dateFormat = new SimpleDateFormat();
+                    dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 }
 
                 @Override
