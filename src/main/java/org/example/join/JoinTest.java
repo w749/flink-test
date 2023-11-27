@@ -10,6 +10,9 @@ import org.example.entity.Order;
 import org.example.entity.Rate;
 import org.example.entity.Result;
 
+/**
+ * 内连接，只有order和rate同时存在一个窗口内时才会匹配输出
+ */
 public class JoinTest implements Base {
     @SneakyThrows
     public static void main(String[] args) {
