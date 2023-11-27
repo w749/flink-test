@@ -11,5 +11,5 @@ Rate:
 {"rateTime": "2023-11-24 14:50:29", "rate": 0.8, "item": "A"}
 {"rateTime": "2023-11-24 14:51:29", "rate": 0.7, "item": "B"}
 {"rateTime": "2023-11-24 14:53:29", "rate": 0.6, "item": "C"}
-{"rateTime": "2023-11-24 14:53:30", "rate": 0.8, "item": "A"}
-{"rateTime": "2023-11-24 14:54:29", "rate": 0.7, "item": "B"}
+{"rateTime": "2023-11-24 14:53:30", "rate": 0.5, "item": "A"}
+{"rateTime": "2023-11-24 14:54:29", "rate": 0.4, "item": "B"}

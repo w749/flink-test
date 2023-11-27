@@ -16,6 +16,7 @@ import org.example.base.Base;
 import org.example.entity.Order;
 import org.example.entity.Rate;
 import org.example.entity.Result;
+import org.example.utils.Utils;
 
 import java.util.Iterator;
 
@@ -53,7 +54,9 @@ public class OutJoinTest implements Base {
                                     }
                                 }
                             }
-                        }).print();
+                        })
+                        .map(Utils::entityToJson)
+                        .print();
 
         environment.execute();
     }
