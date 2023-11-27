@@ -1,2 +1,10 @@
 Order:
-{"orderTime": "2023-11-24 14:58:27", "price": 10, "item": "A"}
+{"orderTime": "2023-11-24 14:50:27", "price": 10, "item": "A"}
+{"orderTime": "2023-11-24 14:50:40", "price": 8,  "item": "A"}
+{"orderTime": "2023-11-24 14:51:20", "price": 6,  "item": "B"}
+{"orderTime": "2023-11-24 14:52:20", "price": 20, "item": "C"}
+
+Rate:
+{"rateTime": "2023-11-24 14:50:29", "rate": 0.8, "item": "A"}
+{"rateTime": "2023-11-24 14:51:29", "rate": 0.7, "item": "B"}
+{"rateTime": "2023-11-24 14:50:29", "rate": 0.6, "item": "C"}

@@ -19,35 +19,20 @@ import java.util.Collections;
 public interface Base {
     // 基础环境
     StreamExecutionEnvironment environment = StreamExecutionEnvironment.getExecutionEnvironment();
-    WatermarkStrategy<String> watermarkStrategy = WatermarkStrategy.<String>noWatermarks().withIdleness(Duration.ofMinutes(1));
+
     WatermarkStrategy<Order> orderWatermarkStrategy = WatermarkStrategy.<Order>forBoundedOutOfOrderness(Duration.ofSeconds(20))
             .withTimestampAssigner(((element, recordTimestamp) -> element.getOrderTime()));
+    WatermarkStrategy<Rate> rateWatermarkStrategy = WatermarkStrategy.<Rate>forBoundedOutOfOrderness(Duration.ofSeconds(20))
+            .withTimestampAssigner(((element, recordTimestamp) -> element.getRateTime()));
 
     // source
     KafkaSource<Order> source1 = Utils.getOrderKafkaSource(Constant.KAFKA_SERVERS, Collections.singletonList("source1"), Constant.KAFKA_GROUP_ID, true);
-    KafkaSource<String> source2 = Utils.getKafkaSource(Constant.KAFKA_SERVERS, Collections.singletonList("source2"), Constant.KAFKA_GROUP_ID, true);
+    KafkaSource<Rate> source2 = Utils.getRateKafkaSource(Constant.KAFKA_SERVERS, Collections.singletonList("source2"), Constant.KAFKA_GROUP_ID, true);
 
     // sink
     KafkaSink<String> sink = Utils.getKafkaSink(Constant.KAFKA_SERVERS, "sink");
 
     // dataStream
     SingleOutputStreamOperator<Order> orderDataStream = environment.fromSource(source1, orderWatermarkStrategy, "OrderDataStream").returns(TypeInformation.of(Order.class));
-    SingleOutputStreamOperator<Rate> rateDataStream = environment.fromSource(source2, watermarkStrategy, "RateDataStream")
-            .map(new RichMapFunction<String, Rate>() {
-                private SimpleDateFormat dateFormat;
-
-                @Override
-                public void open(Configuration parameters) throws Exception {
-                    super.open(parameters);
-                    dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                }
-
-                @Override
-                public Rate map(String value) throws Exception {
-                    String[] split = value.split("\\|");
-                    long timestamp = dateFormat.parse(split[0]).getTime();
-                    float rate = Float.parseFloat(split[1]);
-                    return new Rate(timestamp, rate);
-                }
-            });
+    SingleOutputStreamOperator<Rate> rateDataStream = environment.fromSource(source2, rateWatermarkStrategy, "RateDataStream").returns(TypeInformation.of(Rate.class));
 }

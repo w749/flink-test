@@ -6,9 +6,9 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Rate {
+public class Result {
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private long rateTime;
-    private float rate;
+    private long orderTime;
+    private float realPrice;
     private String item;
 }
