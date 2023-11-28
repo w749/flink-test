@@ -17,7 +17,7 @@ import org.example.entity.Result;
 import org.example.utils.Utils;
 
 /**
- * 时间间隔连接，匹配上下界时间范围内的数据，匹配不到不输出，无法做到外连接。但是可以将未匹配到的数据输出到侧输出流
+ * 时间间隔连接，匹配上下界时间范围内的数据，匹配不到不输出，无法做到外连接。可将迟到的数据输出到侧输出流
  */
 public class IntervalJoinTest implements Base {
     @SneakyThrows
@@ -41,7 +41,7 @@ public class IntervalJoinTest implements Base {
                 });
         intervalJoinDataStream.map(Utils::entityToJson).print();
         intervalJoinDataStream.getSideOutput(orderOutputTag).map(order -> "Order late: " + Utils.entityToJson(order)).print();
-        intervalJoinDataStream.getSideOutput(rateOutputTag).map(order -> "Rate late: " + Utils.entityToJson(order)).print();
+        intervalJoinDataStream.getSideOutput(rateOutputTag).map(rate -> "Rate late: " + Utils.entityToJson(rate)).print();
 
         environment.execute();
     }

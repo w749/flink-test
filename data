@@ -1,3 +1,4 @@
+join:
 Order:
 {"orderTime": "2023-11-24 14:50:27", "price": 10, "item": "A"}
 {"orderTime": "2023-11-24 14:50:40", "price": 8,  "item": "A"}
@@ -6,10 +7,21 @@ Order:
 {"orderTime": "2023-11-24 14:52:30", "price": 20, "item": "A"}
 {"orderTime": "2023-11-24 14:53:35", "price": 20, "item": "A"}
 {"orderTime": "2023-11-24 14:54:20", "price": 6,  "item": "B"}
-
 Rate:
 {"rateTime": "2023-11-24 14:50:35", "rate": 0.8, "item": "A"}
 {"rateTime": "2023-11-24 14:51:29", "rate": 0.7, "item": "B"}
 {"rateTime": "2023-11-24 14:53:29", "rate": 0.6, "item": "C"}
 {"rateTime": "2023-11-24 14:53:30", "rate": 0.5, "item": "A"}
 {"rateTime": "2023-11-24 14:54:29", "rate": 0.4, "item": "B"}
+
+window:
+{"orderTime": "2023-11-24 14:50:00", "price": 1, "item": "A"}
+{"orderTime": "2023-11-24 14:50:20", "price": 3, "item": "A"}
+{"orderTime": "2023-11-24 14:50:30", "price": 5, "item": "A"}
+{"orderTime": "2023-11-24 14:50:52", "price": 7, "item": "A"}
+{"orderTime": "2023-11-24 14:50:55", "price": 9, "item": "A"}
+{"orderTime": "2023-11-24 14:51:00", "price": 11, "item": "A"}
+{"orderTime": "2023-11-24 14:51:20", "price": 13, "item": "A"}
+{"orderTime": "2023-11-24 14:51:30", "price": 15, "item": "A"}
+{"orderTime": "2023-11-24 14:51:52", "price": 17, "item": "A"}
+{"orderTime": "2023-11-24 14:51:55", "price": 19, "item": "A"}
