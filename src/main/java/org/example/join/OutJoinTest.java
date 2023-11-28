@@ -1,8 +1,6 @@
 package org.example.join;
 
 import lombok.SneakyThrows;
-import org.apache.flink.api.common.functions.CoGroupFunction;
-import org.apache.flink.api.common.functions.JoinFunction;
 import org.apache.flink.api.common.functions.RichCoGroupFunction;
 import org.apache.flink.api.common.state.MapState;
 import org.apache.flink.api.common.state.MapStateDescriptor;
@@ -30,6 +28,7 @@ public class OutJoinTest implements Base {
                         .where((KeySelector<Order, String>) Order::getItem)
                         .equalTo((KeySelector<Rate, String>) Rate::getItem)
                         .window(TumblingEventTimeWindows.of(Time.seconds(10)))
+                        .allowedLateness(Time.seconds(5))
                         .apply(new RichCoGroupFunction<Order, Rate, Result>() {
                             private MapState<String, Float> itemRateState;
                             @Override

@@ -21,6 +21,7 @@ public class JoinTest implements Base {
                         .where((KeySelector<Order, String>) Order::getItem)
                         .equalTo((KeySelector<Rate, String>) Rate::getItem)
                         .window(TumblingEventTimeWindows.of(Time.seconds(10)))
+                        .allowedLateness(Time.seconds(5))
                         .apply((JoinFunction<Order, Rate, Result>) (first, second) ->
                                 new Result(first.getOrderTime(), first.getPrice() * second.getRate(), first.getItem()))
                         .map(Utils::entityToJson)
