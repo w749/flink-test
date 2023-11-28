@@ -2,6 +2,7 @@ package org.example.join;
 
 import lombok.SneakyThrows;
 import org.apache.flink.api.common.functions.JoinFunction;
+import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.functions.co.ProcessJoinFunction;
@@ -21,8 +22,8 @@ import org.example.utils.Utils;
 public class IntervalJoinTest implements Base {
     @SneakyThrows
     public static void main(String[] args) {
-        OutputTag<Order> orderOutputTag = new OutputTag<>("OrderOutputTag");
-        OutputTag<Rate> rateOutputTag = new OutputTag<>("RateOutputTag");
+        OutputTag<Order> orderOutputTag = new OutputTag<>("OrderOutputTag", TypeInformation.of(Order.class));
+        OutputTag<Rate> rateOutputTag = new OutputTag<>("RateOutputTag", TypeInformation.of(Rate.class));
         SingleOutputStreamOperator<Result> intervalJoinDataStream = orderDataStream.keyBy(Order::getItem)
                 .intervalJoin(rateDataStream.keyBy(Rate::getItem))
                 .between(Time.seconds(-10), Time.seconds(10))
