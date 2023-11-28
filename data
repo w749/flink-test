@@ -22,6 +22,7 @@ window:
 {"orderTime": "2023-11-24 14:50:55", "price": 9, "item": "A"}
 {"orderTime": "2023-11-24 14:51:00", "price": 11, "item": "A"}
 {"orderTime": "2023-11-24 14:51:20", "price": 13, "item": "A"}
-{"orderTime": "2023-11-24 14:51:30", "price": 15, "item": "A"}
+{"orderTime": "2023-11-24 14:51:51", "price": 15, "item": "A"}
 {"orderTime": "2023-11-24 14:51:52", "price": 17, "item": "A"}
 {"orderTime": "2023-11-24 14:51:55", "price": 19, "item": "A"}
+{"orderTime": "2023-11-24 14:53:01", "price": 21, "item": "A"}

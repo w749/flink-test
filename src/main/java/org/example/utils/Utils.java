@@ -14,6 +14,8 @@ import org.example.extra.OrderSchema;
 import org.example.entity.Order;
 import org.example.extra.RateSchema;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class Utils {
@@ -72,5 +74,9 @@ public class Utils {
 
     public static <T> String entityToJson(T entity) {
         return JSON.toJSONString(entity);
+    }
+
+    public static String timestampFormat(long timestamp) {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(timestamp));
     }
 }

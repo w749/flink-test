@@ -15,9 +15,7 @@ import org.example.base.Base;
 import org.example.entity.Order;
 import org.example.utils.Utils;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class EvictorTest implements Base {
     @SneakyThrows
@@ -37,10 +35,6 @@ public class EvictorTest implements Base {
         environment.execute();
     }
 
-    public static String timestampFormat(long timestamp) {
-        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(timestamp));
-    }
-
     public static ProcessWindowFunction<Order, Order, String, TimeWindow> processWindowFunction(String name) {
         return new ProcessWindowFunction<Order, Order, String, TimeWindow>() {
             @Override
@@ -49,9 +43,9 @@ public class EvictorTest implements Base {
                 long watermark = context.currentWatermark();
                 long windowStart = context.window().getStart();
                 long windowEnd = context.window().getEnd();
-                elements.forEach(order -> orders.add(Utils.entityToJson(order)));
-                System.out.println(String.format("%s, Watermark: [%s], Window: [%s -> %s], data: %s",
-                        name, timestampFormat(watermark), timestampFormat(windowStart), timestampFormat(windowEnd), orders));
+                elements.forEach(order -> orders.add(order.toString()));
+                System.out.println(String.format("%s; Watermark: [%s]; Window: [%s -> %s]; data: %s",
+                        name, Utils.timestampFormat(watermark), Utils.timestampFormat(windowStart), Utils.timestampFormat(windowEnd), orders));
             }
         };
     }
