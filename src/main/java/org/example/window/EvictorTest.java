@@ -22,13 +22,14 @@ public class EvictorTest implements Base {
     public static void main(String[] args) {
         WindowedStream<Order, String, TimeWindow> orderWindowDataStream = orderDataStream.keyBy(Order::getItem)
                 .window(TumblingEventTimeWindows.of(Time.seconds(60)));
+        // 保留每个窗口最后两个元素
         orderWindowDataStream.evictor(CountEvictor.of(2))
                 .process(processWindowFunction("CountEvictor"));
-
+        // 保留每个窗口最后一个元素与之前每个元素差值大于5的值
         orderWindowDataStream.evictor(DeltaEvictor.of(5,
                         (DeltaFunction<Order>) (oldDataPoint, newDataPoint) -> oldDataPoint.getPrice() - newDataPoint.getPrice()))
                 .process(processWindowFunction("DeltaEvictor"));
-
+        // 保留每个窗口最后10秒内的值
         orderWindowDataStream.evictor(TimeEvictor.of(Time.seconds(10)))
                         .process(processWindowFunction("TimeEvictor"));
 
